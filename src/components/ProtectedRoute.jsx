@@ -7,8 +7,7 @@ const ProtectedRoute = ({ children }) => {
     const router = useRouter();
 
     if (!currentUser) {
-        router.push('/login');
-        return <h1> Loading... </h1>
+        return router.push('/login');
     }
 
     return (

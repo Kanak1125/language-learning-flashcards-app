@@ -7,8 +7,7 @@ const ProtectedPublicRoute = ({ children }) => {
     const router = useRouter();
 
     if (currentUser) {
-        router.push('/');
-        return <h1> Loading... </h1>
+        return router.push('/');
     }
 
     return (
