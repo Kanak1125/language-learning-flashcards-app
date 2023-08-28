@@ -4,6 +4,7 @@ import { useRouter } from 'next/navigation';
 import React, { useState, useRef } from 'react'
 import Link from 'next/link';
 import resetPassword from '@/firebase/auth/resetPassword';
+import ProtectedPublicRoute from '@/components/ProtectedPublicRoutes';
 
 const page = () => {
   const [error, setError] = useState("");
@@ -24,7 +25,8 @@ const page = () => {
     router.push('/login');
   }
   return (
-    <div className='min-h-screen flex flex-col items-center justify-center p-2'>
+    <ProtectedPublicRoute>
+      <div className='min-h-screen flex flex-col items-center justify-center p-2'>
       <form onSubmit={handleForm} className='flex flex-col border-2 border-slate-200 w-[80%] max-w-[444px] mx-auto px-4 rounded'>
         {error &&
           <div className='bg-red-100 border-2 border-red-400 text-red-400 mt-2 p-3 rounded'>
@@ -47,7 +49,8 @@ const page = () => {
         Back to 
         <Link href={'/login'} className='text-cyan-400 ml-2 underline'>Log In</Link>
       </div>
-    </div>
+      </div>
+    </ProtectedPublicRoute>
   )
 }
 

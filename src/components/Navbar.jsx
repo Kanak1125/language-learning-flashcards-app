@@ -21,9 +21,9 @@ const Navbar = () => {
     }
     return (
         <header className='flex justify-between items-center p-2'>
-            <h2> {currentUser.email} </h2>
-            <div className="">
-                <p onClick={logout}>Log out</p>
+            <h2> {currentUser ? currentUser.email : ""} </h2>
+            <div onClick={logout} className='cursor-pointer'>
+                Log Out
             </div>
         </header>
     )
