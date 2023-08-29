@@ -1,12 +1,12 @@
 'use client'
 
-import Navbar from "@/components/Navbar";
+import Dashboard from "@/components/Dashboard";
 import ProtectedRoute from "@/components/ProtectedRoute";
 
 export default function Home() {
   return (
     <ProtectedRoute>
-      <Navbar />
+      <Dashboard />
     </ProtectedRoute>
   )
 }

@@ -53,7 +53,7 @@ const page = () => {
             className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
             required
           />
-          <input type="submit" value={"Log In"} className='mb-4 bg-cyan-400 hover:bg-cyan-500 text-white py-2 rounded transition cursor-pointer mt-1 hover:bg-slate-'/>
+          <input type="submit" value={"Log In"} className='mb-4 bg-cyan-400 hover:bg-cyan-500 text-white py-2 rounded transition cursor-pointer mt-1 '/>
           <Link href={'/forgot-password'} className='text-center my-2 hover:underline text-cyan-400'>Forgot Password?</Link>
         </form>
         <div className='mt-5'>
