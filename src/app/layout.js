@@ -11,7 +11,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${inter.className} container mx-auto min-h-screen box-border`}>
+      <body className={`${inter.className} mx-auto min-h-screen box-border`}>
         <AuthProvider>
           {children}
         </AuthProvider>

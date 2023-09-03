@@ -20,16 +20,18 @@ const Navbar = () => {
         router.push('/login');
     }
     return (
-        <header className='flex justify-between items-center p-4 shadow-md'>
+        <header className='p-4 shadow-md'>
             {error &&
                 <div className='bg-red-100 border-2 border-red-400 text-red-400 mt-2 p-3 rounded absolute top-2 left-[50%] translate-x-[-50%] min-w-[200px] text-center'>
                     {error}
                 </div>
             }
-            <h2> {currentUser ? `WELCOME, ${currentUser.email.split('@')[0].toUpperCase()}` : ""} </h2>
-            <button onClick={logout} className='cursor-pointer bg-cyan-400 hover:bg-cyan-500 text-white p-2 rounded transition'>
-                Log Out
-            </button>
+            <div className="container flex justify-between items-center mx-auto">
+                <h2> {currentUser ? `WELCOME, ${currentUser.email.split('@')[0].toUpperCase()}` : ""} </h2>
+                <button onClick={logout} className='cursor-pointer bg-cyan-400 hover:bg-cyan-500 text-white p-2 rounded transition'>
+                    Log Out
+                </button>
+            </div>
         </header>
     )
 }

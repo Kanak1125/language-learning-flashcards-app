@@ -14,15 +14,17 @@ const page = () => {
   function handleForm(e) {
     e.preventDefault();
 
+    setError("");
     const { result, err } = resetPassword(emailRef.current.value);
 
     if (err) {
+      console.log("I'm running...");
       setError("Failed to send mail. Try again!");
       return;
     }
 
     console.log(result);
-    router.push('/login');
+    // router.push('/login');
   }
   return (
     <ProtectedPublicRoute>

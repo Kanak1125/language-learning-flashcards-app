@@ -9,13 +9,16 @@ const Dashboard = () => {
     const pronunciationRef = useRef();
     const meaningRef = useRef();
 
+    function handleForm(e) {
+        e.preventDefault();
+    }
   return (
     <>
         {open && <div className='absolute min-h-screen bg-black/60 flex items-center justify-center w-full'>
                     <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
                         <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
                         <hr />
-                        <form action="" className='p-4 flex flex-col'>
+                        <form onSubmit={handleForm} className='p-4 flex flex-col'>
                     <label htmlFor="word">Word </label>
                     <input
                         type="text"
@@ -53,7 +56,7 @@ const Dashboard = () => {
                     </div>
                 </div>}
         <Navbar />
-        <div className='p-4'>
+        <div className='p-4 container mx-auto'>
             <h2 className='text-2xl font-semibold'>Your Flashcards</h2>
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
