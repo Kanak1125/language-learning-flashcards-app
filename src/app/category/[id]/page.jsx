@@ -1,39 +1,51 @@
 'use client'
 
 import React, { useState, useRef } from 'react'
-import Navbar from "@/components/Navbar";
+import Navbar from '@/components/Navbar';
+import ProtectedRoute from '@/components/ProtectedRoute';
 
-const Dashboard = () => {
+const page = ({params}) => {
     const [open, setOpen] = useState(false);
-    const categoryRef = useRef();
-    const languageRef = useRef();
+    const wordRef = useRef();
+    const pronunciationRef = useRef();
+    const meaningRef = useRef();
 
     function handleForm(e) {
         e.preventDefault();
     }
+
   return (
-    <>
+    <ProtectedRoute>
         {open && <div className='absolute min-h-screen bg-black/60 flex items-center justify-center w-full'>
                     <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
-                        <h2 className='text-2xl text-center font-semibold py-4'>Add your category</h2>
+                        <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
                         <hr />
                         <form onSubmit={handleForm} className='p-4 flex flex-col'>
-                    <label htmlFor="word">Category </label>
+                    <label htmlFor="word">Word </label>
                     <input
                         type="text"
                         id='word'
-                        ref={categoryRef}
+                        ref={wordRef}
                         className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
-                        placeholder='e.g. modern newa'
+                        placeholder='e.g. gomenasai'
                         required
                     />
-                    <label htmlFor="pronunciation">Language </label>
+                    <label htmlFor="pronunciation">Pronunciation </label>
                     <input
                         type="text"
                         id='pronunciation'
-                        ref={languageRef}
+                        ref={pronunciationRef}
                         className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
-                        placeholder='e.g. Newari'
+                        placeholder='go-me-naa-saii'
+                        required
+                    />
+                    <label htmlFor="meaning">Meaning </label>
+                    <input
+                        type="text"
+                        id='meaning'
+                        ref={meaningRef}
+                        className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+                        placeholder='I am sorry (informal)'
                         required
                     />
                     <footer className='ml-auto'>
@@ -47,13 +59,13 @@ const Dashboard = () => {
                 </div>}
         <Navbar />
         <div className='p-4 container mx-auto'>
-            <h2 className='text-2xl font-semibold'>Your Categories</h2>
+            <h2 className='text-2xl font-semibold'>Your Flashcards</h2>
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
             </div>
         </div>
-    </>
+    </ProtectedRoute>
   )
 }
 
-export default Dashboard
+export default page
