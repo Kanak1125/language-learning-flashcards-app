@@ -16,7 +16,7 @@ let firebase_app = getApps().length === 0 ? initializeApp(firebaseConfig) : getA
 
 export const auth = getAuth(firebase_app);
 
-const db = getFirestore(firebase_app);
+export const db = getFirestore(firebase_app);
 
 export const database = {
   categories: collection(db, "categories"),

@@ -2,14 +2,39 @@
 
 import React, { useState, useRef } from 'react'
 import Navbar from "@/components/Navbar";
+import { database, db } from '@/firebase/config';
+import { doc, setDoc } from "firebase/firestore";
+import { useAuthContext } from '@/contexts/AuthContext';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
     const categoryRef = useRef();
     const languageRef = useRef();
+    const { currentUser } = useAuthContext();
 
-    function handleForm(e) {
+    async function handleForm(e) {
         e.preventDefault();
+
+        console.log(categoryRef.current.value, languageRef.current.value);
+
+
+        function closeModal() {
+            setOpen(false);
+        }
+        // database.categories.add({
+        //     category: categoryRef.current.value,
+        //     userId: currentUser.uid,
+        //     createdAt: null,
+        // })
+
+        await setDoc(doc(db, "categories", categoryRef.current.value), {
+            category: categoryRef.current.value,
+            userId: currentUser.uid,
+            createdAt: null,
+        })
+
+        categoryRef.current.value = "";
+        closeModal();
     }
   return (
     <>
