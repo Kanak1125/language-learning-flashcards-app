@@ -19,6 +19,7 @@ function reducer(state, { type, payload }) {
         case ACTIONS.UPDATE_CATEGORY:
             return {
                 ...state,
+                category: payload.category
             }
     }
 }
@@ -42,8 +43,17 @@ export function useCategory(categoryId = null, category = null) {
             })
         }
 
-        database.categories.doc()
-        
+        database.categories.doc(categoryId).get().then(doc => {
+            dispatch({
+                type: ACTIONS.UPDATE_CATEGORY,
+                payload: { category: doc }
+            })
+        }).catch(() => {
+            dispatch({
+                type: ACTIONS.UPDATE_CATEGORY,
+                payload: { category: null },
+            })
+        })     
     }, [categoryId]);
 
     return state;

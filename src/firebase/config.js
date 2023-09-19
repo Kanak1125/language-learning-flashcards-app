@@ -1,6 +1,7 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
+import { collection } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -15,10 +16,10 @@ let firebase_app = getApps().length === 0 ? initializeApp(firebaseConfig) : getA
 
 export const auth = getAuth(firebase_app);
 
-const firestore = getFirestore(firebaseConfig);
+const db = getFirestore(firebase_app);
 
 export const database = {
-  categories: firestore.collection("categories"),
-  cards: firestore.collection("cards"),
+  categories: collection(db, "categories"),
+  cards: collection(db, "cards"),
 }
 // export default firebase_app;
