@@ -1,7 +1,6 @@
 import { initializeApp, getApps } from "firebase/app";
 import { getAuth } from "firebase/auth";
-import { getFirestore } from "firebase/firestore";
-import { collection } from "firebase/firestore";
+import { getFirestore, collection, serverTimestamp } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
@@ -21,5 +20,6 @@ export const db = getFirestore(firebase_app);
 export const database = {
   categories: collection(db, "categories"),
   cards: collection(db, "cards"),
+  getCurrentTimeStamp: serverTimestamp,
 }
 // export default firebase_app;

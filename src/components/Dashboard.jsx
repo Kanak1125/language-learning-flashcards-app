@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import { database, db } from '@/firebase/config';
 import { doc, setDoc } from "firebase/firestore";
 import { useAuthContext } from '@/contexts/AuthContext';
+import { v4 as uuid } from 'uuid';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
@@ -27,12 +28,13 @@ const Dashboard = () => {
         //     createdAt: null,
         // })
 
-        await setDoc(doc(db, "categories", categoryRef.current.value), {
-            category: categoryRef.current.value,
+        await setDoc(doc(db, "categories", uuid()), {
+            name: categoryRef.current.value,
+            language: languageRef.current.value,
             userId: currentUser.uid,
-            createdAt: null,
+            createdAt: database.getCurrentTimeStamp(),
         })
-
+        
         categoryRef.current.value = "";
         closeModal();
     }
