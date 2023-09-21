@@ -1,17 +1,47 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Navbar from "@/components/Navbar";
 import { database, db } from '@/firebase/config';
-import { doc, setDoc } from "firebase/firestore";
+import { doc, setDoc, getDocs, where, onSnapshot, QuerySnapshot } from "firebase/firestore";
 import { useAuthContext } from '@/contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
+import Link from 'next/link';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
     const categoryRef = useRef();
     const languageRef = useRef();
     const { currentUser } = useAuthContext();
+    const [categories, setCategories] = useState([]);
+
+    useEffect(() => {
+        const getCategories = () => {
+            const unsubscribe = onSnapshot(database.categories, 
+                where("userId", "==", currentUser.uid),
+                (querySnapshot) => {    // callback function to populate the categories state...
+                    setCategories(
+                        querySnapshot.docs.map(doc => {
+                            const {name, language} = doc.data();
+
+                            return (
+                                <Link href={`/category/${doc.id}`} key={doc.id}
+                                    className='w-100 h-20 shadow-lg rounded-md p-3 border-2 border-slate-400 hover:shadow-xl md:max-w-[200px] '
+                                >
+                                  <h1>{name}</h1>
+                                  <hr className='border-slate-400'/>
+                                  <p>{language}</p>
+                                </Link>
+                            )
+                        })
+                    )
+                }
+            )
+            return () => unsubscribe();
+        }
+        getCategories();
+    }, []);
+
 
     async function handleForm(e) {
         e.preventDefault();
@@ -78,6 +108,7 @@ const Dashboard = () => {
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
             </div>
+            <div className='grid md:grid-cols-4 gap-5 my-10'>{categories}</div>
         </div>
     </>
   )

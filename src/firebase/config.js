@@ -20,6 +20,8 @@ export const db = getFirestore(firebase_app);
 export const database = {
   categories: collection(db, "categories"),
   cards: collection(db, "cards"),
+  // categoryRef: doc(db, "categories", categoryId),
+  // cardRef: doc(db, "cards", cardId),
   getCurrentTimeStamp: serverTimestamp,
 }
 // export default firebase_app;

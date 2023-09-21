@@ -43,6 +43,7 @@ export function useCategory(categoryId = null, category = null) {
             })
         }
 
+        // the following need to be changed to the modular version of the firebase...
         database.categories.doc(categoryId).get().then(doc => {
             dispatch({
                 type: ACTIONS.UPDATE_CATEGORY,
