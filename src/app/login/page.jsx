@@ -11,7 +11,7 @@ const page = () => {
   const emailRef = useRef();
   const passwordRef = useRef();
   const router = useRouter();
-
+  
   async function handleForm(e) {
     e.preventDefault();
     setError("");
@@ -23,7 +23,7 @@ const page = () => {
       return;
     }
 
-    console.log(result);
+    console.log(result.user.uid);
     router.push('/');
   }
 

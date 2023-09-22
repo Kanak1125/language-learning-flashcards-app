@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Navbar from "@/components/Navbar";
 import { database, db } from '@/firebase/config';
-import { doc, setDoc, getDocs, where, onSnapshot, QuerySnapshot } from "firebase/firestore";
+import { doc, setDoc, getDocs, where, onSnapshot, query } from "firebase/firestore";
 import { useAuthContext } from '@/contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
 import Link from 'next/link';
@@ -16,9 +16,10 @@ const Dashboard = () => {
     const [categories, setCategories] = useState([]);
 
     useEffect(() => {
+        console.log(currentUser.uid);
         const getCategories = () => {
-            const unsubscribe = onSnapshot(database.categories, 
-                where("userId", "==", currentUser.uid),
+            const q = query(database.categories, where("userId", "==", currentUser.uid));
+            const unsubscribe = onSnapshot(q,
                 (querySnapshot) => {    // callback function to populate the categories state...
                     setCategories(
                         querySnapshot.docs.map(doc => {
@@ -26,7 +27,7 @@ const Dashboard = () => {
 
                             return (
                                 <Link href={`/category/${doc.id}`} key={doc.id}
-                                    className='w-100 h-20 shadow-lg rounded-md p-3 border-2 border-slate-400 hover:shadow-xl md:max-w-[200px] '
+                                    className='w-100 min-h-20 shadow-lg rounded-md p-3 border-2 border-slate-400 hover:shadow-xl md:max-w-[200px] '
                                 >
                                   <h1>{name}</h1>
                                   <hr className='border-slate-400'/>
