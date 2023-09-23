@@ -21,16 +21,19 @@ const Dashboard = () => {
             const q = query(database.categories, where("userId", "==", currentUser.uid));
             const unsubscribe = onSnapshot(q,
                 (querySnapshot) => {    // callback function to populate the categories state...
+                    // querySnapshot.docChanges().forEach(change => {
+                    //     if (change.type === "added") {console.log("New category: ", change.doc.data());}
+                    // })
                     setCategories(
                         querySnapshot.docs.map(doc => {
                             const {name, language} = doc.data();
 
                             return (
                                 <Link href={`/category/${doc.id}`} key={doc.id}
-                                    className='w-100 min-h-20 shadow-lg rounded-md p-3 border-2 border-slate-400 hover:shadow-xl md:max-w-[200px] '
+                                    className='w-100 min-h-20 shadow-lg rounded-md p-3 border-2 border-slate-400 hover:shadow-xl md:max-w-[200px] transition-all '
                                 >
                                   <h1>{name}</h1>
-                                  <hr className='border-slate-400'/>
+                                  <hr className='border-slate-400 rounded'/>
                                   <p>{language}</p>
                                 </Link>
                             )
@@ -106,7 +109,7 @@ const Dashboard = () => {
         <Navbar />
         <div className='p-4 container mx-auto'>
             <h2 className='text-2xl font-semibold'>Your Categories</h2>
-            <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
+            <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 ' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
             </div>
             <div className='grid md:grid-cols-4 gap-5 my-10'>{categories}</div>

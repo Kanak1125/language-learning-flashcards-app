@@ -3,12 +3,15 @@
 import React, { useState, useRef } from 'react'
 import Navbar from '@/components/Navbar';
 import ProtectedRoute from '@/components/ProtectedRoute';
+import { useCategory } from '@/hooks/useCategory';
 
 const page = ({params}) => {
     const [open, setOpen] = useState(false);
     const wordRef = useRef();
     const pronunciationRef = useRef();
     const meaningRef = useRef();
+    const { categoryId, category, childCards } = useCategory(params.id);
+    console.log(categoryId, category);
 
     function handleForm(e) {
         e.preventDefault();

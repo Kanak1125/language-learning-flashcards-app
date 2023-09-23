@@ -1,5 +1,6 @@
 import { useEffect, useReducer } from "react";
-import { database } from "@/firebase/config";
+import { doc, getDoc } from "firebase/firestore";
+import { db } from "@/firebase/config";
 
 const ACTIONS = {
     SELECT_CATEGORY: 'select_category',
@@ -44,17 +45,25 @@ export function useCategory(categoryId = null, category = null) {
         }
 
         // the following need to be changed to the modular version of the firebase...
-        database.categories.doc(categoryId).get().then(doc => {
-            dispatch({
-                type: ACTIONS.UPDATE_CATEGORY,
-                payload: { category: doc }
-            })
-        }).catch(() => {
-            dispatch({
-                type: ACTIONS.UPDATE_CATEGORY,
-                payload: { category: null },
-            })
-        })     
+
+        async function getCurrentCategory() {
+            const docRef = doc(db, "categories", categoryId);
+            const docSnap = await getDoc(docRef);
+
+            if (docSnap.exists()) {
+                dispatch({
+                    type: ACTIONS.UPDATE_CATEGORY,
+                    payload: { category: docSnap.data() },
+                })
+            } else {
+                dispatch({
+                    type: ACTIONS.UPDATE_CATEGORY,
+                    payload: { category: null },
+                })
+            }
+        }
+
+        getCurrentCategory(); 
     }, [categoryId]);
 
     return state;
