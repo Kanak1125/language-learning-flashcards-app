@@ -3,10 +3,10 @@
 import React, { useState, useEffect, useRef } from 'react'
 import Navbar from "@/components/Navbar";
 import { database, db } from '@/firebase/config';
-import { doc, setDoc, getDocs, where, onSnapshot, query } from "firebase/firestore";
+import { doc, setDoc, where, onSnapshot, query } from "firebase/firestore";
 import { useAuthContext } from '@/contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
-import Link from 'next/link';
+import CategoryCard from './CategoryCard';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
@@ -25,19 +25,13 @@ const Dashboard = () => {
                     //     if (change.type === "added") {console.log("New category: ", change.doc.data());}
                     // })
                     setCategories(
-                        querySnapshot.docs.map(doc => {
-                            const {name, language} = doc.data();
-
-                            return (
-                                <Link href={`/category/${doc.id}`} key={doc.id}
-                                    className='w-100 min-h-20 shadow-lg rounded-md p-3 border-2 border-slate-400 hover:shadow-xl md:max-w-[200px] transition-all '
-                                >
-                                  <h1>{name}</h1>
-                                  <hr className='border-slate-400 rounded'/>
-                                  <p>{language}</p>
-                                </Link>
-                            )
-                        })
+                        querySnapshot.docs.map(doc => 
+                            <CategoryCard 
+                                key = {doc.id}
+                                docId = {doc.id}
+                                docData = {doc.data()}
+                            />    
+                        )
                     )
                 }
             )
@@ -50,19 +44,14 @@ const Dashboard = () => {
     async function handleForm(e) {
         e.preventDefault();
 
-        console.log(categoryRef.current.value, languageRef.current.value);
-
+        // console.log(categoryRef.current.value, languageRef.current.value);
 
         function closeModal() {
             setOpen(false);
         }
-        // database.categories.add({
-        //     category: categoryRef.current.value,
-        //     userId: currentUser.uid,
-        //     createdAt: null,
-        // })
 
-        await setDoc(doc(db, "categories", uuid()), {
+        const docRef = doc(db, "categories", uuid());
+        await setDoc(docRef, {
             name: categoryRef.current.value,
             language: languageRef.current.value,
             userId: currentUser.uid,

@@ -1,6 +1,6 @@
 import { useEffect, useReducer } from "react";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "@/firebase/config";
+import { doc, getDoc, onSnapshot, query, where } from "firebase/firestore";
+import { database, db } from "@/firebase/config";
 
 const ACTIONS = {
     SELECT_CATEGORY: 'select_category',
@@ -21,6 +21,12 @@ function reducer(state, { type, payload }) {
             return {
                 ...state,
                 category: payload.category
+            }
+
+        case ACTIONS.SET_CHILD_CARDS:
+            return {
+                ...state,
+                child_cards: payload.child_cards,
             }
     }
 }
@@ -66,5 +72,33 @@ export function useCategory(categoryId = null, category = null) {
         getCurrentCategory(); 
     }, [categoryId]);
 
+    useEffect(() => {
+        console.log("You need to update the child flashcards as well...");
+
+        const q = query(database.cards, where("parentCategory", "==", categoryId));
+
+        const unsubscribe = onSnapshot(q, (querySnapshot) => {
+            dispatch({
+                type: ACTIONS.SET_CHILD_CARDS,
+                payload: {
+                    child_cards: querySnapshot.docs.map(doc => doc.data()),
+                }
+            })
+        })
+
+        // const unsubscribe = onSnapshot(docRef, (doc) => {
+        //     dispatch({
+        //         type: ACTIONS.SET_CHILD_CARDS,
+        //         payload: {
+        //             child_cards: 
+        //         }
+        //     })
+        // })
+        return () => unsubscribe();
+    }, [category, categoryId]);
+
+    useEffect(() => {
+        console.log(state);
+    }, [state]);
     return state;
 }

@@ -4,18 +4,46 @@ import React, { useState, useRef } from 'react'
 import Navbar from '@/components/Navbar';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useCategory } from '@/hooks/useCategory';
+import { setDoc, doc } from "firebase/firestore";
+import { v4 as uuid } from 'uuid';
+import { database, db } from '@/firebase/config';
+import FlashCard from '@/components/FlashCard';
 
 const page = ({params}) => {
     const [open, setOpen] = useState(false);
     const wordRef = useRef();
     const pronunciationRef = useRef();
     const meaningRef = useRef();
-    const { categoryId, category, childCards } = useCategory(params.id);
-    console.log(categoryId, category);
+    const { categoryId, category, child_cards : childCards } = useCategory(params.id);
+    // console.log(categoryId, category, childCards);
 
-    function handleForm(e) {
+    async function handleForm(e) {
         e.preventDefault();
+
+        function closeModal() {
+            setOpen(false);
+        }
+
+        const docRef = doc(db, 'cards', uuid());
+        await setDoc(docRef, {
+            word: wordRef.current.value,
+            pronunciation: pronunciationRef.current.value,
+            meaning: meaningRef.current.value,
+            parentCategory: categoryId,   
+            createdAt: database.getCurrentTimeStamp(),
+        })
+
+        closeModal();
     }
+
+    const flashCards = childCards.map((card, idx) => {
+        return (
+            <FlashCard 
+                key={idx}
+                cardData = {card}
+            />
+        )
+    })
 
   return (
     <ProtectedRoute>
@@ -65,6 +93,9 @@ const page = ({params}) => {
             <h2 className='text-2xl font-semibold'>Your Flashcards</h2>
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
+            </div>
+            <div className='grid md:grid-cols-4 gap-5 my-10'>
+                { flashCards }
             </div>
         </div>
     </ProtectedRoute>
