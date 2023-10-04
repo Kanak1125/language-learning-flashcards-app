@@ -1,3 +1,45 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* .animate-flip {
+    transition: all 300ms linear;
+}
+
+.animate-flip:active {
+    perspective: -500cm;
+    transform: rotate3d(0, 1, 0, 180deg);
+} */
+
+.card__content {
+    /* background: #002357; */
+    background: linear-gradient(114deg, #002357 1.47%, #000 95.08%);
+    transform-style: preserve-3d;
+    /* backdrop-filter: blur(10px); */
+    box-shadow: 3px 2px 6px 0px #002357;
+}
+.card__content.flip-card {
+    transform: rotateY(.5turn);
+}
+
+.mirror-content {
+    transform: rotateY(.5turn);
+}
+
+.card__front,
+.card__back {
+    backface-visibility: hidden;
+    transform-style: preserve-3d;
+    text-shadow: 2px 1px 3px black;
+}
+
+.card__title {
+    transform: translateZ(6rem);
+}
+.card__pronunciation {
+    transform: translateZ(4rem);
+}
+
+.card__meaning {
+    transform: translateZ(3rem);
+}

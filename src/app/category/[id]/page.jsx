@@ -94,7 +94,7 @@ const page = ({params}) => {
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
             </div>
-            <div className='grid md:grid-cols-4 gap-5 my-10'>
+            <div className='grid md:grid-cols-3 gap-x-10 gap-y-5 my-10'>
                 { flashCards }
             </div>
         </div>
