@@ -17,6 +17,9 @@ const page = ({params}) => {
     const { categoryId, category, child_cards : childCards } = useCategory(params.id);
     // console.log(categoryId, category, childCards);
 
+    if (open) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'unset';
+
     async function handleForm(e) {
         e.preventDefault();
 
@@ -47,7 +50,7 @@ const page = ({params}) => {
 
   return (
     <ProtectedRoute>
-        {open && <div className='absolute min-h-screen bg-black/60 flex items-center justify-center w-full'>
+        {open && <div className='fixed inset-0 bg-black/60 flex items-center justify-center z-40'>
                     <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
                         <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
                         <hr />
