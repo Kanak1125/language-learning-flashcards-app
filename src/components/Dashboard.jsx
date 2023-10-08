@@ -7,6 +7,7 @@ import { doc, setDoc, where, onSnapshot, query } from "firebase/firestore";
 import { useAuthContext } from '@/contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
 import CategoryCard from './CategoryCard';
+import MyModal from './MyModal';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
@@ -15,6 +16,9 @@ const Dashboard = () => {
     const { currentUser } = useAuthContext();
     const [categories, setCategories] = useState([]);
 
+    if (open) document.body.style.overflow = 'hidden';
+    else document.body.style.overflow = 'unset';
+    
     useEffect(() => {
         console.log(currentUser.uid);
         const getCategories = () => {
@@ -63,7 +67,7 @@ const Dashboard = () => {
     }
   return (
     <>
-        {open && <div className='absolute min-h-screen bg-black/60 flex items-center justify-center w-full'>
+        {open && <MyModal>
                     <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
                         <h2 className='text-2xl text-center font-semibold py-4'>Add your category</h2>
                         <hr />
@@ -94,7 +98,7 @@ const Dashboard = () => {
                     </footer>
                         </form>
                     </div>
-                </div>}
+        </MyModal>}
         <Navbar />
         <div className='p-4 container mx-auto'>
             <h2 className='text-2xl font-semibold'>Your Categories</h2>

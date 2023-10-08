@@ -81,7 +81,7 @@ export function useCategory(categoryId = null, category = null) {
             dispatch({
                 type: ACTIONS.SET_CHILD_CARDS,
                 payload: {
-                    child_cards: querySnapshot.docs.map(doc => doc.data()),
+                    child_cards: querySnapshot.docs.map(database.formatDoc),
                 }
             })
         })

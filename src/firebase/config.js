@@ -22,6 +22,12 @@ export const database = {
   cards: collection(db, "cards"),
   // categoryRef: (categoryId) => doc(db, "categories", categoryId),
   // cardRef: doc(db, "cards", cardId),
+  formatDoc: (doc) => {
+    return {
+      id: doc.id,
+      ...doc.data(),
+    }
+  },
   getCurrentTimeStamp: serverTimestamp,
 }
 // export default firebase_app;

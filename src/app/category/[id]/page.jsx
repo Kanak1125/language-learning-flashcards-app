@@ -8,6 +8,8 @@ import { setDoc, doc } from "firebase/firestore";
 import { v4 as uuid } from 'uuid';
 import { database, db } from '@/firebase/config';
 import FlashCard from '@/components/FlashCard';
+import RandomCard from '@/components/RandomCard';
+import MyModal from '@/components/MyModal';
 
 const page = ({params}) => {
     const [open, setOpen] = useState(false);
@@ -40,6 +42,7 @@ const page = ({params}) => {
     }
 
     const flashCards = childCards.map((card, idx) => {
+        console.log(card);
         return (
             <FlashCard 
                 key={idx}
@@ -50,11 +53,11 @@ const page = ({params}) => {
 
   return (
     <ProtectedRoute>
-        {open && <div className='fixed inset-0 bg-black/60 flex items-center justify-center z-40'>
-                    <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
-                        <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
-                        <hr />
-                        <form onSubmit={handleForm} className='p-4 flex flex-col'>
+        {open && <MyModal>
+            <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
+                <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
+                <hr />
+                <form onSubmit={handleForm} className='p-4 flex flex-col'>
                     <label htmlFor="word">Word </label>
                     <input
                         type="text"
@@ -88,12 +91,12 @@ const page = ({params}) => {
                         onClick={() => setOpen(false)}
                         >Close</button>
                     </footer>
-                        </form>
-                    </div>
-                </div>}
+                </form>
+            </div>
+        </MyModal>}
         <Navbar />
         <div className='p-4 container mx-auto'>
-            <h2 className='text-2xl font-semibold'>Your Flashcards</h2>
+            <h2 className='text-2xl font-semibold text-[#8e8e8e]'>Your Flashcards</h2>
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
             </div>
@@ -101,6 +104,7 @@ const page = ({params}) => {
                 { flashCards }
             </div>
         </div>
+        <RandomCard />
     </ProtectedRoute>
   )
 }
