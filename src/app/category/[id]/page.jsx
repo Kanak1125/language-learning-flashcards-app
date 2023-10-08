@@ -104,7 +104,9 @@ const page = ({params}) => {
                 { flashCards }
             </div>
         </div>
-        <RandomCard />
+        <RandomCard 
+            flashCards={childCards}
+        />
     </ProtectedRoute>
   )
 }

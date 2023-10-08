@@ -22,7 +22,7 @@ export const database = {
   cards: collection(db, "cards"),
   // categoryRef: (categoryId) => doc(db, "categories", categoryId),
   // cardRef: doc(db, "cards", cardId),
-  formatDoc: (doc) => {
+  formatDoc: (doc) => { // function to format doc (i.e. add the doc id to the existing doc.data() object)...
     return {
       id: doc.id,
       ...doc.data(),
