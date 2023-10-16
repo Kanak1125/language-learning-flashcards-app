@@ -10,7 +10,7 @@ const FlashCard = ({cardData}) => {
     //     <p>{pronunciation}</p>
     //     {/* meaning will be in the back-side of the flash card with 3d flip rotation... */}
     // </div>
-    <div className="card w-full md:max-w-[333px] h-[222px] cursor-pointer">
+    <div className="card w-full md:max-w-[333px] h-[222px] ">
       <div className={`card__content text-center relative bg-red-200 p-10 transition-all duration-1000 h-full rounded-md  ${isFlipped ? 'flip-card' : ''}`}> {/* this needs to be flipping when clicked */}
 
         <div className="card__front absolute inset-0 p-4 flex flex-col justify-center">
