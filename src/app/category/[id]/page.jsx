@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useState, useRef } from 'react'
+import React, { useState, useEffect, useRef } from 'react'
 import Navbar from '@/components/Navbar';
 import ProtectedRoute from '@/components/ProtectedRoute';
 import { useCategory } from '@/hooks/useCategory';
@@ -17,10 +17,13 @@ const page = ({params}) => {
     const pronunciationRef = useRef();
     const meaningRef = useRef();
     const { categoryId, category, child_cards : childCards } = useCategory(params.id);
+    const [showRandomCard, setShowRandomCard] = useState(false);
+    const [cards, setCards] = useState([]);
 
-    if (open) document.body.style.overflow = 'hidden';
+    if (open || showRandomCard) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
-
+    console.log("show random card state changed...");
+    console.log(childCards);
     async function handleForm(e) {
         e.preventDefault();
 
@@ -41,15 +44,31 @@ const page = ({params}) => {
         closeModal();
     }
 
-    const flashCards = childCards.map((card, idx) => {
-        console.log(card);
-        return (
-            <FlashCard 
-                key={idx}
-                cardData = {card}
-            />
-        )
-    })
+    // const flashCards = childCards.map((card, idx) => {
+    //     console.log(card);
+    //     return (
+    //         <FlashCard 
+    //             key={card.id}
+    //             cardData={card}
+    //         />
+    //     )
+    // })
+
+    useEffect(() => {
+        const createFlashCard = () => {
+            return childCards.map((card) => {
+                console.log(card);
+                return (
+                    <FlashCard 
+                        key={card.id}
+                        cardData={card}
+                    />
+                )
+            })
+        }
+        // createFlashCard();
+        setCards(createFlashCard());
+    }, [childCards, showRandomCard]);
 
   return (
     <ProtectedRoute>
@@ -101,11 +120,13 @@ const page = ({params}) => {
                 +
             </div>
             <div className='grid md:grid-cols-3 gap-x-10 gap-y-5 my-10'>
-                { flashCards }
+                { cards }
             </div>
         </div>
         <RandomCard 
             flashCards={childCards}
+            showRandomCard={showRandomCard}
+            setShowRandomCard={setShowRandomCard}
         />
     </ProtectedRoute>
   )

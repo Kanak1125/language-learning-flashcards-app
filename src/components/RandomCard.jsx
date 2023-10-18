@@ -2,10 +2,9 @@ import { useState } from 'react';
 import { GiPerspectiveDiceSixFacesRandom } from 'react-icons/gi';
 import MyModal from './MyModal';
 import FlashCard from './FlashCard';
-import RiCloseCircleLine from 'react-icons/ri';
 
-const RandomCard = ({ flashCards }) => {
-  const [showRandomCard, setShowRandomCard] = useState(false);
+const RandomCard = (props) => {
+  const { flashCards, showRandomCard, setShowRandomCard } = props;
   const [currentCard, setCurrentCard] = useState({});
 
   if (showRandomCard) document.body.style.overflow = 'hidden';
@@ -27,7 +26,7 @@ const RandomCard = ({ flashCards }) => {
     <>
     {showRandomCard && <MyModal>
         <FlashCard 
-          // key={idx}
+          key={currentCard.id}
           cardData = {currentCard}
         />
         <div 

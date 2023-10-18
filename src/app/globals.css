@@ -39,7 +39,7 @@
     transform-style: preserve-3d;
     backface-visibility: hidden;
 }
-.progress__bar p {
+.progress__label {
     transform: translateZ(1.5rem);
 }
 .progress__bar input[type="range"] {
