@@ -4,3 +4,4 @@
 - npm install react-bootstrap bootstrap
 - npm i uuid
 - npm install react-icons --save
+<!-- - npm install --save autoprefixer postcss tailwindcss flowbite flowbite-react -->

@@ -17,7 +17,6 @@ const page = ({params}) => {
     const pronunciationRef = useRef();
     const meaningRef = useRef();
     const { categoryId, category, child_cards : childCards } = useCategory(params.id);
-    // console.log(categoryId, category, childCards);
 
     if (open) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
@@ -36,6 +35,7 @@ const page = ({params}) => {
             meaning: meaningRef.current.value,
             parentCategory: categoryId,   
             createdAt: database.getCurrentTimeStamp(),
+            progress: 50,
         })
 
         closeModal();

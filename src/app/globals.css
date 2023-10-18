@@ -2,15 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* .animate-flip {
-    transition: all 300ms linear;
-}
-
-.animate-flip:active {
-    perspective: -500cm;
-    transform: rotate3d(0, 1, 0, 180deg);
-} */
-
 .card__content {
     /* background: #002357; */
     background: linear-gradient(114deg, #002357 1.47%, #000 95.08%);
@@ -22,7 +13,7 @@
     transform: rotateY(.5turn);
 }
 
-.mirror-content {
+.mirror__content {
     transform: rotateY(.5turn);
 }
 
@@ -42,4 +33,15 @@
 
 .card__meaning {
     transform: translateZ(3rem);
+}
+
+.progress__bar {
+    transform-style: preserve-3d;
+    backface-visibility: hidden;
+}
+.progress__bar p {
+    transform: translateZ(1.5rem);
+}
+.progress__bar input[type="range"] {
+    transform: translateZ(2rem);
 }
