@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react'
 import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { FaTrash } from 'react-icons/fa';
-import { doc, setDoc } from 'firebase/firestore';
+import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 
 const FlashCard = ({cardData}) => {
@@ -37,8 +37,14 @@ const FlashCard = ({cardData}) => {
     }, [currentProgress]);
 
     const deleteFlashCard = async (id) => {
-      console.log("Deleted: " + id);
+      const docRef = doc(db, 'cards', id);
+      try {
+        await deleteDoc(docRef);
+      } catch (error) {
+        console.log(`Error while deletion: ${error}`);
+      }
     }
+    
   return (
     // <div className='w-full md:w-[200px] h-[240px] bg-cyan-400 rounded-md flex items-center flex-col justify-center gap-5 cursor-pointer animate-flip'>
     //     <h2 className='text-2xl font-bold'>{word}</h2>
