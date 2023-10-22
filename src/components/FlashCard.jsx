@@ -3,12 +3,19 @@ import { BsEyeFill, BsEyeSlashFill } from 'react-icons/bs';
 import { FaTrash } from 'react-icons/fa';
 import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
-const FlashCard = ({cardData}) => {
+const FlashCard = ({ cardData, closeCard }) => {
     const {id, word, meaning, pronunciation, progress} = cardData;
     const [isFlipped, setIsFlipped] = useState(false);
     const [progressLabel, setProgressLabel] = useState("");
     const [currentProgress, setCurrentProgress] = useState(progress);
+
+    const modalRef = useRef();
+    useClickOutside(modalRef, () => {
+      // if condition added to check if the closeCard function is passed as a prop as function when the modal is opened whereas it has been passed as UNDEFINED when the modal is closed...
+      if (typeof closeCard == "function") closeCard();
+    });
 
     const COLOR_MAP = new Map([
       ['Novice', "text-blue-400"],
@@ -51,7 +58,7 @@ const FlashCard = ({cardData}) => {
     //     <p>{pronunciation}</p>
     //     {/* meaning will be in the back-side of the flash card with 3d flip rotation... */}
     // </div>
-    <div className="__card w-full break-all md:max-w-[333px] h-[222px] ">
+    <div ref={modalRef} className="__card w-full break-all md:max-w-[333px] h-[222px] ">
       <div className={`card__content text-center relative bg-red-200 p-10 transition-all duration-1000 h-full rounded-md  ${isFlipped ? 'flip-card' : ''}`}> {/* this needs to be flipping when clicked */}
 
         <div className="card__front absolute inset-0 p-4 flex flex-col justify-center">

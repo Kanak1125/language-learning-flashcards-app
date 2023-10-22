@@ -8,6 +8,7 @@ import { useAuthContext } from '@/contexts/AuthContext';
 import { v4 as uuid } from 'uuid';
 import CategoryCard from './CategoryCard';
 import MyModal from './MyModal';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const Dashboard = () => {
     const [open, setOpen] = useState(false);
@@ -15,6 +16,9 @@ const Dashboard = () => {
     const languageRef = useRef();
     const { currentUser } = useAuthContext();
     const [categories, setCategories] = useState([]);
+
+    const modalRef = useRef();
+    useClickOutside(modalRef, () => setOpen(false));
 
     if (open) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
@@ -68,7 +72,9 @@ const Dashboard = () => {
   return (
     <>
         {open && <MyModal>
-                    <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
+                    <div 
+                        ref={modalRef}
+                        className='bg-white w-[80%] md:w-[555px] rounded-md'>
                         <h2 className='text-2xl text-center font-semibold py-4'>Add your category</h2>
                         <hr />
                         <form onSubmit={handleForm} className='p-4 flex flex-col'>
@@ -105,7 +111,7 @@ const Dashboard = () => {
             <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 ' onClick={() => setOpen(true)} title='Add new flashcard'>
                 +
             </div>
-            <div className='grid md:grid-cols-4 gap-14 my-10'>{categories}</div>
+            <div className='grid md:grid-cols-4 gap-14 my-14'>{categories}</div>
         </div>
     </>
   )

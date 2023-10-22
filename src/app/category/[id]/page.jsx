@@ -10,6 +10,7 @@ import { database, db } from '@/firebase/config';
 import FlashCard from '@/components/FlashCard';
 import RandomCard from '@/components/RandomCard';
 import MyModal from '@/components/MyModal';
+import { useClickOutside } from '@/hooks/useClickOutside';
 
 const page = ({params}) => {
     const [open, setOpen] = useState(false);
@@ -17,10 +18,11 @@ const page = ({params}) => {
     const pronunciationRef = useRef();
     const meaningRef = useRef();
     const { categoryId, category, child_cards : childCards } = useCategory(params.id);
-    const [showRandomCard, setShowRandomCard] = useState(false);
     const [cards, setCards] = useState([]);
+    const modalRef = useRef();
+    useClickOutside(modalRef, () => setOpen(false));
 
-    if (open || showRandomCard) document.body.style.overflow = 'hidden';
+    if (open) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
     console.log("show random card state changed...");
     console.log(childCards);
@@ -68,12 +70,14 @@ const page = ({params}) => {
         }
         // createFlashCard();
         setCards(createFlashCard());
-    }, [childCards, showRandomCard]);
+    }, [childCards]);
 
   return (
     <ProtectedRoute>
         {open && <MyModal>
-            <div className='bg-white w-[80%] md:w-[555px] rounded-md'>
+            <div 
+                ref={modalRef} 
+                className='bg-white w-[80%] md:w-[555px] rounded-md'>
                 <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
                 <hr />
                 <form onSubmit={handleForm} className='p-4 flex flex-col'>
@@ -125,8 +129,6 @@ const page = ({params}) => {
         </div>
         <RandomCard 
             flashCards={childCards}
-            showRandomCard={showRandomCard}
-            setShowRandomCard={setShowRandomCard}
         />
     </ProtectedRoute>
   )
