@@ -29,7 +29,7 @@ const Navbar = () => {
             {/* nav bar txt color: #8e8e8e */}
             <div className="container flex justify-between items-center mx-auto">
                 <h2 className='text-[#8e8e8e]'> {currentUser ? `WELCOME, ${currentUser.email.split('@')[0].toUpperCase()}` : ""} </h2>
-                <button onClick={logout} className='cursor-pointer bg-white hover:bg-gray-200 p-2 text-black rounded transition'>
+                <button onClick={logout} className='cursor-pointer bg-white hover:bg-gray-50 p-2 text-black rounded transition'>
                     Log Out
                 </button>
             </div>

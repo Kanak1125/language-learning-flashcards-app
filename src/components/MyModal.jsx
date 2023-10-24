@@ -14,7 +14,7 @@ const MyModal = ({ showRandomCard, setShowRandomCard, children }) => {
   // document.addEventListener('click', close);
 
   return (
-    <div className='fixed inset-0 bg-black/60 px-4 flex items-center justify-center z-40'>
+    <div className='fixed inset-0 bg-black/60 px-4 flex items-center justify-center backdrop-blur-sm z-40 '>
         { children }
     </div>
   )

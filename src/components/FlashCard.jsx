@@ -58,8 +58,8 @@ const FlashCard = ({ cardData, closeCard }) => {
     //     <p>{pronunciation}</p>
     //     {/* meaning will be in the back-side of the flash card with 3d flip rotation... */}
     // </div>
-    <div ref={modalRef} className="__card w-full break-all md:max-w-[333px] h-[222px] ">
-      <div className={`card__content text-center relative bg-red-200 p-10 transition-all duration-1000 h-full rounded-md  ${isFlipped ? 'flip-card' : ''}`}> {/* this needs to be flipping when clicked */}
+    <div ref={modalRef} className="__card w-full break-all md:max-w-[333px] h-[222px] overflow-hidden">
+      <div className={`card__content text-center relative p-10 transition-all duration-1000 h-full border-2 border-white/10 bg-black rounded-md __flashcard__shadow  ${isFlipped ? 'flip-card' : ''}`}> {/* this needs to be flipping when clicked */}
 
         <div className="card__front absolute inset-0 p-4 flex flex-col justify-center">
           <div className='__icons absolute right-4 top-4 flex gap-2 items-center'>
@@ -101,7 +101,7 @@ const FlashCard = ({ cardData, closeCard }) => {
               min={0}
               max={100}
               value={currentProgress}
-              className='w-full cursor-pointer'
+              className='w-full cursor-pointer __input__range'
               onChange={(e) => setCurrentProgress(e.target.value)}
             />
           </div>

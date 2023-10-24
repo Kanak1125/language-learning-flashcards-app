@@ -74,16 +74,16 @@ const Dashboard = () => {
         {open && <MyModal>
                     <div 
                         ref={modalRef}
-                        className='bg-white w-[80%] md:w-[555px] rounded-md'>
-                        <h2 className='text-2xl text-center font-semibold py-4'>Add your category</h2>
-                        <hr />
+                        className='w-[80%] md:w-[555px] rounded-md bg-white/5 backdrop-blur-sm text-white'>
+                        <h2 className='text-2xl text-center font-semibold py-4 '>Add your category</h2>
+                        <hr className='border-none h-[1px] bg-gradient-to-r from-white/25'/>
                         <form onSubmit={handleForm} className='p-4 flex flex-col'>
                     <label htmlFor="word">Category </label>
                     <input
                         type="text"
                         id='word'
                         ref={categoryRef}
-                        className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+                        className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300'
                         placeholder='e.g. modern newa'
                         required
                     />
@@ -92,13 +92,13 @@ const Dashboard = () => {
                         type="text"
                         id='pronunciation'
                         ref={languageRef}
-                        className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+                        className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300'
                         placeholder='e.g. Newari'
                         required
                     />
                     <footer className='ml-auto'>
-                        <input type="submit" value="Add" className='cursor-pointer bg-cyan-400 hover:bg-cyan-500 text-white h-8 w-20 rounded transition'/>
-                        <button className='cursor-pointer border-2 border-slate-500 hover:bg-slate-500 hover:text-white text-slate-500 h-8 w-20 rounded transition ml-4'
+                        <input type="submit" value="Add" className='cursor-pointer bg-white hover:bg-gray-50 text-black h-8 w-20 rounded transition-all duration-300'/>
+                        <button className='cursor-pointer border-2 border-white hover:bg-white hover:text-black text-white h-8 w-20 rounded transition-all duration-300 ml-4'
                         onClick={() => setOpen(false)}
                         >Close</button>
                     </footer>
@@ -108,8 +108,10 @@ const Dashboard = () => {
         <Navbar />
         <div className='p-4 container mx-auto'>
             <h2 className='text-2xl font-semibold'>Your Categories</h2>
-            <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 ' onClick={() => setOpen(true)} title='Add new flashcard'>
-                +
+            <div className='md:w-[200px] h-[200px] bg-[#0a0a0a] rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 overflow-hidden' onClick={() => setOpen(true)} title='Add new category'>
+                <div className="__add__layer bg-gradient-to-r from-white/10 ">
+                    +
+                </div>
             </div>
             <div className='grid md:grid-cols-4 gap-14 my-14'>{categories}</div>
         </div>

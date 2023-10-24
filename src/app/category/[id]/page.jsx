@@ -77,7 +77,7 @@ const page = ({params}) => {
         {open && <MyModal>
             <div 
                 ref={modalRef} 
-                className='bg-white w-[80%] md:w-[555px] rounded-md'>
+                className='bg-black w-[80%] md:w-[555px] rounded-md '>
                 <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
                 <hr />
                 <form onSubmit={handleForm} className='p-4 flex flex-col'>
@@ -119,9 +119,11 @@ const page = ({params}) => {
         </MyModal>}
         <Navbar />
         <div className='p-4 container mx-auto'>
-            <h2 className='text-2xl font-semibold text-[#8e8e8e]'>Your Flashcards</h2>
-            <div className='md:w-[200px] h-[200px] bg-slate-100 rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 selec' onClick={() => setOpen(true)} title='Add new flashcard'>
-                +
+            <h2 className='text-2xl font-semibold text'>Your Flashcards</h2>
+            <div className='md:w-[200px] h-[200px] bg-[#0a0a0a] rounded-md text-8xl text-center leading-[200px] cursor-pointer my-4 select-none overflow-hidden' onClick={() => setOpen(true)} title='Add new flashcard'>
+                <div className="__add__layer bg-gradient-to-r from-white/10 ">
+                    +
+                </div>
             </div>
             <div className='grid md:grid-cols-3 gap-x-10 gap-y-5 my-10'>
                 { cards }

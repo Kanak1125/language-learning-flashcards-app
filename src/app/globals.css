@@ -4,10 +4,10 @@
 
 .card__content {
     /* background: #002357; */
-    background: linear-gradient(114deg, #002357 1.47%, #000 95.08%);
+    /* background: linear-gradient(114deg, #002357 1.47%, #000 95.08%); */
     transform-style: preserve-3d;
     /* backdrop-filter: blur(10px); */
-    box-shadow: 3px 2px 6px 0px #002357;
+    /* box-shadow: 3px 2px 6px 0px #002357; */
 }
 .card__content.flip-card {
     transform: rotateY(.5turn);
@@ -45,3 +45,45 @@
 .progress__bar input[type="range"] {
     transform: translateZ(2rem);
 }
+
+.__box__shadow {
+    box-shadow: 2px 3px 10px 0px #002357;
+}
+
+/* .__flashcard__shadow {
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+} */
+.__category__card__shadow:hover {
+    box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+}
+
+.__input__range {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 3.5px;
+    /* background: linear-gradient(to right, rgb(255 255 255 / 0.25), transparent); */
+    background: rgb(255 255 255 / 0.25);
+    outline: none;
+    opacity: 0.7;
+    -webkit-transition: 0.2s;
+    transition: opacity 0.2s;
+    border-radius: 1rem;
+    cursor: pointer;
+}
+
+.__input__range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    height: 20px;
+    width: 20px;
+    border-radius: 50%;
+    background: white;
+    box-shadow: 0px 0px 10px 3px whitesmoke;
+    cursor: grab;
+    transition: background .3s ease-in-out;
+  }
+.__input__range:hover::-webkit-slider-thumb {
+    cursor: grab;
+  }
+.__input__range:active::-webkit-slider-thumb {
+    cursor: grabbing;
+  }
