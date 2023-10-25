@@ -74,7 +74,7 @@ const Dashboard = () => {
         {open && <MyModal>
                     <div 
                         ref={modalRef}
-                        className='w-[80%] md:w-[555px] rounded-md bg-white/5 backdrop-blur-sm text-white'>
+                        className='w-[80%] md:w-[555px] rounded-md bg-white/5 backdrop-blur-lg text-white'>
                         <h2 className='text-2xl text-center font-semibold py-4 '>Add your category</h2>
                         <hr className='border-none h-[1px] bg-gradient-to-r from-white/25'/>
                         <form onSubmit={handleForm} className='p-4 flex flex-col'>

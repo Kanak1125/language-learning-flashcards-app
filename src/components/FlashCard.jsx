@@ -5,7 +5,7 @@ import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import { useClickOutside } from '@/hooks/useClickOutside';
 
-const FlashCard = ({ cardData, closeCard }) => {
+const FlashCard = ({ cardData, showRandomCard, closeCard }) => {
     const {id, word, meaning, pronunciation, progress} = cardData;
     const [isFlipped, setIsFlipped] = useState(false);
     const [progressLabel, setProgressLabel] = useState("");
@@ -63,11 +63,11 @@ const FlashCard = ({ cardData, closeCard }) => {
 
         <div className="card__front absolute inset-0 p-4 flex flex-col justify-center">
           <div className='__icons absolute right-4 top-4 flex gap-2 items-center'>
-            <FaTrash 
+            {!showRandomCard && <FaTrash 
               size={32}
               className='cursor-pointer rounded transition-all hover:bg-gray-50/5 p-2 '
               onClick={() => deleteFlashCard(id)}
-            />
+            />}
             <BsEyeFill 
               size={36}
               className='cursor-pointer rounded transition-all hover:bg-gray-50/5 p-2 '
@@ -100,7 +100,7 @@ const FlashCard = ({ cardData, closeCard }) => {
               id="" 
               min={0}
               max={100}
-              value={currentProgress}
+              value={ currentProgress }
               className='w-full cursor-pointer __input__range'
               onChange={(e) => setCurrentProgress(e.target.value)}
             />

@@ -4,9 +4,8 @@ import MyModal from './MyModal';
 import FlashCard from './FlashCard';
 
 const RandomCard = (props) => {
-  const { flashCards } = props;
+  const { flashCards, showRandomCard, setShowRandomCard } = props;
   const [currentCard, setCurrentCard] = useState({});
-  const [showRandomCard, setShowRandomCard] = useState(false);
 
   if (showRandomCard) document.body.style.overflow = 'hidden';
   else document.body.style.overflow = 'unset';
@@ -31,6 +30,7 @@ const RandomCard = (props) => {
         <FlashCard 
           key={currentCard.id}
           cardData={currentCard}
+          showRandomCard={showRandomCard}
           closeCard={closeCard}
         />
         <div 
@@ -39,7 +39,7 @@ const RandomCard = (props) => {
         >X</div>
       </MyModal>}
       {flashCards.length !== 0 && <div
-        className='__random__card__icon text-white fixed ml-5 bottom-5 cursor-pointer w-[50px] h-[50px] rounded-full bg-[#0a0a0a] flex items-center justify-center animate-bounce'
+        className='__random__card__icon text-white cursor-pointer w-[40px] h-[40px] hover:bg-white/10 rounded-full transition-all flex items-center justify-center duration-300'
         onClick={displayRandomCard}
       >
           <GiPerspectiveDiceSixFacesRandom size={24} />

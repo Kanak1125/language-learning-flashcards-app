@@ -11,6 +11,7 @@ import FlashCard from '@/components/FlashCard';
 import RandomCard from '@/components/RandomCard';
 import MyModal from '@/components/MyModal';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { PiSlideshow } from 'react-icons/pi';
 
 const page = ({params}) => {
     const [open, setOpen] = useState(false);
@@ -21,6 +22,7 @@ const page = ({params}) => {
     const [cards, setCards] = useState([]);
     const modalRef = useRef();
     useClickOutside(modalRef, () => setOpen(false));
+    const [showRandomCard, setShowRandomCard] = useState(false);
 
     if (open) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
@@ -77,16 +79,16 @@ const page = ({params}) => {
         {open && <MyModal>
             <div 
                 ref={modalRef} 
-                className='bg-black w-[80%] md:w-[555px] rounded-md '>
+                className='w-[80%] md:w-[555px] rounded-md bg-white/5 backdrop-blur-lg text-white'>
                 <h2 className='text-2xl text-center font-semibold py-4'>Add new flashcard</h2>
-                <hr />
+                <hr className='border-none h-[1px] bg-gradient-to-r from-white/25'/>
                 <form onSubmit={handleForm} className='p-4 flex flex-col'>
                     <label htmlFor="word">Word </label>
                     <input
                         type="text"
                         id='word'
                         ref={wordRef}
-                        className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+                        className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300'
                         placeholder='e.g. gomenasai'
                         required
                     />
@@ -95,7 +97,7 @@ const page = ({params}) => {
                         type="text"
                         id='pronunciation'
                         ref={pronunciationRef}
-                        className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+                        className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300'
                         placeholder='go-me-naa-saii'
                         required
                     />
@@ -104,13 +106,13 @@ const page = ({params}) => {
                         type="text"
                         id='meaning'
                         ref={meaningRef}
-                        className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+                        className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300'
                         placeholder='I am sorry (informal)'
                         required
                     />
                     <footer className='ml-auto'>
-                        <input type="submit" value="Add" className='cursor-pointer bg-cyan-400 hover:bg-cyan-500 text-white h-8 w-20 rounded transition'/>
-                        <button className='cursor-pointer border-2 border-slate-500 hover:bg-slate-500 hover:text-white text-slate-500 h-8 w-20 rounded transition ml-4'
+                        <input type="submit" value="Add" className='cursor-pointer bg-white hover:bg-gray-50 text-black h-8 w-20 rounded transition-all duration-300'/>
+                        <button className='cursor-pointer border-2 border-white hover:bg-white hover:text-black text-white h-8 w-20 rounded transition-all duration-300 ml-4'
                         onClick={() => setOpen(false)}
                         >Close</button>
                     </footer>
@@ -129,9 +131,16 @@ const page = ({params}) => {
                 { cards }
             </div>
         </div>
-        <RandomCard 
-            flashCards={childCards}
-        />
+        <div className={`${showRandomCard ? '' : 'fixed bottom-5 right-5 h-[50px] rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center px-1 gap-3'}`}>
+            <RandomCard 
+                flashCards={childCards}
+                showRandomCard={showRandomCard}
+                setShowRandomCard={setShowRandomCard}
+            />
+            <div className='cursor-pointer w-[40px] h-[40px] hover:bg-white/10 rounded-full transition-all flex items-center justify-center duration-300'>
+                <PiSlideshow size={24} className='cursor-pointer'/>
+            </div>
+        </div>
     </ProtectedRoute>
   )
 }

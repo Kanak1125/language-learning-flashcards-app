@@ -29,7 +29,7 @@ const page = () => {
   return (
     <ProtectedPublicRoute>
       <div className='min-h-screen flex flex-col items-center justify-center p-2'>
-      <form onSubmit={handleForm} className='flex flex-col border-2 border-slate-200 w-[80%] max-w-[444px] mx-auto px-4 rounded'>
+      <form onSubmit={handleForm} className='flex flex-col w-[80%] max-w-[444px] mx-auto px-4 rounded backdrop-blur-sm text-white border-2 border-white/25'>
         {msg &&
           <div className={`${
             isSuccess ? 'bg-green-100 border-green-400 text-green-400 ' :
@@ -44,15 +44,15 @@ const page = () => {
           type="email" 
           id='email'
           ref={emailRef} 
-          className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+          className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300 focus:bg-white/5'
           placeholder='someone@example.com'
           required
         />
-        <input type="submit" value={"Send mail"} className='mb-4 bg-cyan-400 hover:bg-cyan-500 text-white py-2 rounded transition cursor-pointer mt-1 hover:bg-slate-'/>
+        <input type="submit" value={"Send mail"} className='mb-4 bg-white hover:bg-gray-50 text-black py-2 rounded transition cursor-pointer mt-1'/>
       </form>
-      <div className='mt-5'>
+      <div className='mt-5 text-white/25'>
         Back to 
-        <Link href={'/login'} className='text-cyan-400 ml-2 underline'>Log In</Link>
+        <Link href={'/login'} className='text-white ml-2 underline'>Log In</Link>
       </div>
       </div>
     </ProtectedPublicRoute>

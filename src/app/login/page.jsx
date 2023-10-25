@@ -30,7 +30,7 @@ const page = () => {
   return (
     <ProtectedPublicRoute>
       <div className='min-h-screen flex flex-col items-center justify-center p-2'>
-        <form onSubmit={handleForm} className='flex flex-col border-2 border-slate-200 w-[80%] max-w-[444px] mx-auto px-4 rounded'>
+        <form onSubmit={handleForm} className='flex flex-col w-[80%] max-w-[444px] mx-auto px-4 rounded backdrop-blur-sm text-white border-2 border-white/25'>
           {error &&
             <div className='bg-red-100 border-2 border-red-400 text-red-400 mt-2 p-3 rounded'>
               {error}
@@ -42,7 +42,7 @@ const page = () => {
             type="email" 
             id='email'
             ref={emailRef} 
-            className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+            className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300 focus:bg-white/5'
             required
           />
           <label htmlFor="password">Password: </label>
@@ -50,15 +50,15 @@ const page = () => {
             type="password" 
             id="password" 
             ref={passwordRef}
-            className='mb-5 border-2 border-slate-200 py-1 px-2 mt-1 rounded'
+            className='mb-5 border-2 border-white/25 py-1 px-2 mt-1 rounded bg-transparent focus:border-white/50 outline-none transition-all duration-300 focus:bg-white/5'
             required
           />
-          <input type="submit" value={"Log In"} className='mb-4 bg-cyan-400 hover:bg-cyan-500 text-white py-2 rounded transition cursor-pointer mt-1 '/>
-          <Link href={'/forgot-password'} className='text-center my-2 hover:underline text-cyan-400'>Forgot Password?</Link>
+          <input type="submit" value={"Login"} className='mb-4 bg-white hover:bg-gray-50 text-black py-2 rounded transition cursor-pointer mt-1 '/>
+          <Link href={'/forgot-password'} className='text-center my-2 hover:underline text-white'>Forgot Password?</Link>
         </form>
-        <div className='mt-5'>
+        <div className='mt-5 text-white/25'>
           Don't have an account? 
-          <Link href={'/signup'} className='text-cyan-400 ml-2 underline'>Sign Up</Link>
+          <Link href={'/signup'} className='text-white ml-2 underline'>Sign Up</Link>
         </div>
       </div>
     </ProtectedPublicRoute>
