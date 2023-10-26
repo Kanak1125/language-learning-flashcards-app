@@ -9,10 +9,7 @@ const CardShow = (props) => {
     const { flashCards, openCardShow, setOpenCardShow } = props;
 
     function displayCardsOnSwiper() {
-        // if (flashCards.length === 0) return;
-
         setOpenCardShow(true);
-
     }
 
     const allCards = flashCards.map((card, idx) => {
@@ -23,11 +20,6 @@ const CardShow = (props) => {
               cardData={card}
               openCardShow={openCardShow}
             />
-            {/* <div className='w-[200px] h-[200px] bg-black'>
-              <h2 className='text-2xl font-bold'>{card.word}</h2>
-              <p>{card.pronunciation}</p>
-              {/* meaning will be in the back-side of the flash card with 3d flip rotation... 
-            </div> */}
           </SwiperSlide>
         )
     })

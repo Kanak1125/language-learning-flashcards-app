@@ -49,16 +49,6 @@ const page = ({params}) => {
         closeModal();
     }
 
-    // const flashCards = childCards.map((card, idx) => {
-    //     console.log(card);
-    //     return (
-    //         <FlashCard 
-    //             key={card.id}
-    //             cardData={card}
-    //         />
-    //     )
-    // })
-
     useEffect(() => {
         const createFlashCard = () => {
             return childCards.map((card) => {
@@ -71,7 +61,6 @@ const page = ({params}) => {
                 )
             })
         }
-        // createFlashCard();
         setCards(createFlashCard());
     }, [childCards]);
 

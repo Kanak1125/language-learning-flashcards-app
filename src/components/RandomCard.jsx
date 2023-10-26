@@ -7,9 +7,6 @@ const RandomCard = (props) => {
   const { flashCards, showRandomCard, setShowRandomCard } = props;
   const [currentCard, setCurrentCard] = useState({});
 
-  // if (showRandomCard) document.body.style.overflow = 'hidden';
-  // else document.body.style.overflow = 'unset';
-
   function displayRandomCard() {
     if (flashCards.length === 0) return;
 

@@ -69,11 +69,6 @@ const FlashCard = ({ cardData, showRandomCard, closeCard, openCardShow }) => {
     }
     
   return (
-    // <div className='w-full md:w-[200px] h-[240px] bg-cyan-400 rounded-md flex items-center flex-col justify-center gap-5 cursor-pointer animate-flip'>
-    //     <h2 className='text-2xl font-bold'>{word}</h2>
-    //     <p>{pronunciation}</p>
-    //     {/* meaning will be in the back-side of the flash card with 3d flip rotation... */}
-    // </div>
     <div ref={modalRef} className="__card w-full break-all md:max-w-[333px] h-[222px] overflow-hidden">
       <div className={`card__content text-center relative p-10 transition-all duration-1000 h-full border-2 border-white/10 bg-black rounded-md __flashcard__shadow  ${isFlipped ? 'flip-card' : ''}`}> {/* this needs to be flipping when clicked */}
 

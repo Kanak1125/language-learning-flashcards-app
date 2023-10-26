@@ -3,11 +3,7 @@
 @tailwind utilities;
 
 .card__content {
-    /* background: #002357; */
-    /* background: linear-gradient(114deg, #002357 1.47%, #000 95.08%); */
     transform-style: preserve-3d;
-    /* backdrop-filter: blur(10px); */
-    /* box-shadow: 3px 2px 6px 0px #002357; */
 }
 .card__content.flip-card {
     transform: rotateY(.5turn);
