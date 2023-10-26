@@ -5,7 +5,7 @@ import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import { useClickOutside } from '@/hooks/useClickOutside';
 
-const FlashCard = ({ cardData, showRandomCard, closeCard }) => {
+const FlashCard = ({ cardData, showRandomCard, closeCard, openCardShow }) => {
     const {id, word, meaning, pronunciation, progress} = cardData;
     const [isFlipped, setIsFlipped] = useState(false);
     const [progressLabel, setProgressLabel] = useState("");
@@ -32,7 +32,9 @@ const FlashCard = ({ cardData, showRandomCard, closeCard }) => {
         }, { merge: true });  // merge: true is to prevent overwriting the whole document...
       })();
 
+      // console.log(progress);
       const timer = setTimeout(() => {
+        // setCurrentProgress(progress);
         setProgressLabel(
           currentProgress <= 33 ? "Novice" :
           currentProgress >= 34 && currentProgress <= 66 ? "Intermediate" 
@@ -43,6 +45,13 @@ const FlashCard = ({ cardData, showRandomCard, closeCard }) => {
       return () => clearTimeout(timer);
     }, [currentProgress]);
 
+    useEffect(() => {
+      const timer = setTimeout(() => {
+        setCurrentProgress(progress);
+      }, 250);
+
+      return () => clearTimeout(timer);
+    }, [progress]);
     const deleteFlashCard = async (id) => {
       const docRef = doc(db, 'cards', id);
       try {
@@ -63,7 +72,7 @@ const FlashCard = ({ cardData, showRandomCard, closeCard }) => {
 
         <div className="card__front absolute inset-0 p-4 flex flex-col justify-center">
           <div className='__icons absolute right-4 top-4 flex gap-2 items-center'>
-            {!showRandomCard && <FaTrash 
+            {!showRandomCard && !openCardShow && <FaTrash 
               size={32}
               className='cursor-pointer rounded transition-all hover:bg-gray-50/5 p-2 '
               onClick={() => deleteFlashCard(id)}

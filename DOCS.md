@@ -14,4 +14,5 @@
 - npm install react-bootstrap bootstrap
 - npm i uuid
 - npm install react-icons --save
+- npm i swiper
 <!-- - npm install --save autoprefixer postcss tailwindcss flowbite flowbite-react -->

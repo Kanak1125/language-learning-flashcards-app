@@ -87,3 +87,7 @@
 .__input__range:active::-webkit-slider-thumb {
     cursor: grabbing;
   }
+
+.__swiper__pagination {
+    
+}

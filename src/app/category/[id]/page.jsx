@@ -11,20 +11,21 @@ import FlashCard from '@/components/FlashCard';
 import RandomCard from '@/components/RandomCard';
 import MyModal from '@/components/MyModal';
 import { useClickOutside } from '@/hooks/useClickOutside';
-import { PiSlideshow } from 'react-icons/pi';
+import CardShow from '@/components/CardShow';
 
 const page = ({params}) => {
     const [open, setOpen] = useState(false);
     const wordRef = useRef();
     const pronunciationRef = useRef();
     const meaningRef = useRef();
-    const { categoryId, category, child_cards : childCards } = useCategory(params.id);
+    const { categoryId, category, child_cards : childCards, loading } = useCategory(params.id);
     const [cards, setCards] = useState([]);
     const modalRef = useRef();
     useClickOutside(modalRef, () => setOpen(false));
     const [showRandomCard, setShowRandomCard] = useState(false);
+    const [openCardShow, setOpenCardShow] = useState(false);
 
-    if (open) document.body.style.overflow = 'hidden';
+    if (open || showRandomCard || openCardShow) document.body.style.overflow = 'hidden';
     else document.body.style.overflow = 'unset';
     console.log("show random card state changed...");
     console.log(childCards);
@@ -131,16 +132,18 @@ const page = ({params}) => {
                 { cards }
             </div>
         </div>
-        <div className={`${showRandomCard ? '' : 'fixed bottom-5 right-5 h-[50px] rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center px-1 gap-3'}`}>
+        {cards.length !== 0 ? <div className={`${showRandomCard || openCardShow ? '' : 'fixed bottom-5 right-5 h-[50px] rounded-full bg-white/5 backdrop-blur-sm flex items-center justify-center px-1 gap-3'}`}>
             <RandomCard 
                 flashCards={childCards}
                 showRandomCard={showRandomCard}
                 setShowRandomCard={setShowRandomCard}
             />
-            <div className='cursor-pointer w-[40px] h-[40px] hover:bg-white/10 rounded-full transition-all flex items-center justify-center duration-300'>
-                <PiSlideshow size={24} className='cursor-pointer'/>
-            </div>
-        </div>
+            <CardShow 
+                flashCards={childCards}
+                openCardShow={openCardShow}
+                setOpenCardShow={setOpenCardShow}
+            />
+        </div> : <h1 className='text-2xl font-semibold text-center'>No flashCards yet!</h1>}
     </ProtectedRoute>
   )
 }

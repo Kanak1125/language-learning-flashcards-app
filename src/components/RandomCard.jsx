@@ -7,8 +7,8 @@ const RandomCard = (props) => {
   const { flashCards, showRandomCard, setShowRandomCard } = props;
   const [currentCard, setCurrentCard] = useState({});
 
-  if (showRandomCard) document.body.style.overflow = 'hidden';
-  else document.body.style.overflow = 'unset';
+  // if (showRandomCard) document.body.style.overflow = 'hidden';
+  // else document.body.style.overflow = 'unset';
 
   function displayRandomCard() {
     if (flashCards.length === 0) return;
@@ -26,7 +26,7 @@ const RandomCard = (props) => {
 
   return (
     <>
-    {showRandomCard && <MyModal showRandomCard={showRandomCard} setShowRandomCard={setShowRandomCard}>
+    {showRandomCard && <MyModal>
         <FlashCard 
           key={currentCard.id}
           cardData={currentCard}
@@ -38,12 +38,12 @@ const RandomCard = (props) => {
           onClick={closeCard}  
         >X</div>
       </MyModal>}
-      {flashCards.length !== 0 && <div
+      <div
         className='__random__card__icon text-white cursor-pointer w-[40px] h-[40px] hover:bg-white/10 rounded-full transition-all flex items-center justify-center duration-300'
         onClick={displayRandomCard}
       >
           <GiPerspectiveDiceSixFacesRandom size={24} />
-      </div>}
+      </div>
     </>
   )
 }
