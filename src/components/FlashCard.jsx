@@ -4,12 +4,18 @@ import { FaTrash } from 'react-icons/fa';
 import { deleteDoc, doc, setDoc } from 'firebase/firestore';
 import { db } from '@/firebase/config';
 import { useClickOutside } from '@/hooks/useClickOutside';
+import { BiUserVoice } from 'react-icons/bi';
+import { useTextToSpeech } from '@/hooks/useTextToSpeech';
 
 const FlashCard = ({ cardData, showRandomCard, closeCard, openCardShow }) => {
     const {id, word, meaning, pronunciation, progress} = cardData;
     const [isFlipped, setIsFlipped] = useState(false);
     const [progressLabel, setProgressLabel] = useState("");
     const [currentProgress, setCurrentProgress] = useState(progress);
+    const pronunciationRef = useRef();
+    const DEFAULT_TEXT = "Hello World!";
+
+    const [handlePlay, handleStop] = useTextToSpeech(pronunciationRef.current?.innerText || DEFAULT_TEXT);  // sends undefined and hence the default text when the pronunciationRef.current.innerText is undefined...
 
     const modalRef = useRef();
     useClickOutside(modalRef, () => {
@@ -52,6 +58,7 @@ const FlashCard = ({ cardData, showRandomCard, closeCard, openCardShow }) => {
 
       return () => clearTimeout(timer);
     }, [progress]);
+
     const deleteFlashCard = async (id) => {
       const docRef = doc(db, 'cards', id);
       try {
@@ -84,7 +91,12 @@ const FlashCard = ({ cardData, showRandomCard, closeCard, openCardShow }) => {
             />
           </div>
           <h3 className='card__title text-3xl font-semibold '>{word}</h3>
-          <p className='card__pronunciation'>{pronunciation}</p>
+          <div className='card__pronunciation mt-2 flex items-center justify-center'>
+            <BiUserVoice size={36} className='inline-block cursor-pointer hover:bg-gray-50/5 transition-all p-2 rounded'
+            onClick={handlePlay}
+            />
+            <p ref={pronunciationRef} className='pl-2 italic'>{pronunciation}</p>
+          </div>
           <p className={`absolute bottom-3 ${COLOR_MAP.get(progressLabel)}`}>{progressLabel}</p>
           <p></p>
         </div>

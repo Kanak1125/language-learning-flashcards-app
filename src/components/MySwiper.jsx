@@ -12,7 +12,7 @@ const MySwiper = ({ children }) => {
   return (
     <Swiper
         modules={[Navigation, Pagination, Scrollbar, A11y, EffectCoverflow]}
-        // spaceBetween={50}
+        // spaceBetween={10}
         slidesPerView={'auto'}
         // onSwiper={(swiper) => console.log(swiper)}
         // pagination={{ clickable: true }}
@@ -33,6 +33,7 @@ const MySwiper = ({ children }) => {
             prevEl: '.__swiper__btn__prev',
             clickable: true,
         }}
+        // width={'100%'}
     >
       { children }
       <div className="__slider__controller flex items-center justify-center mt-6 gap-4">

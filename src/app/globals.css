@@ -88,6 +88,10 @@
     cursor: grabbing;
   }
 
-.__swiper__pagination {
-    
+.__swiper__pagination > *{
+    background: white !important;
+}
+
+.__swiper__pagination .swiper-pagination-bullet-active{
+    box-shadow: 0px 0px 3px 2px white;
 }
