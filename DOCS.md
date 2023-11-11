@@ -15,4 +15,5 @@
 - npm i uuid
 - npm install react-icons --save
 - npm i swiper
+- npm install encoding
 <!-- - npm install --save autoprefixer postcss tailwindcss flowbite flowbite-react -->
