@@ -6,7 +6,7 @@ import React, { useState, useRef } from 'react'
 import { useRouter } from 'next/navigation';
 import ProtectedPublicRoute from '@/components/ProtectedPublicRoutes';
 
-const Page = () => {
+const page = () => {
   const [error, setError] = useState("");
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -65,4 +65,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page

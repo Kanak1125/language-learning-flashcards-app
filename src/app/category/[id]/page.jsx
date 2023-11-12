@@ -13,7 +13,7 @@ import MyModal from '@/components/MyModal';
 import { useClickOutside } from '@/hooks/useClickOutside';
 import CardShow from '@/components/CardShow';
 
-const Page = ({params}) => {
+const page = ({params}) => {
     const [open, setOpen] = useState(false);
     const wordRef = useRef();
     const pronunciationRef = useRef();
@@ -137,4 +137,4 @@ const Page = ({params}) => {
   )
 }
 
-export default Page
+export default page

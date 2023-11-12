@@ -5,7 +5,7 @@ import Link from 'next/link';
 import resetPassword from '@/firebase/auth/resetPassword';
 import ProtectedPublicRoute from '@/components/ProtectedPublicRoutes';
 
-const Page = () => {
+const page = () => {
   const [msg, setMsg] = useState("");
   const [isSuccess, setIsSuccess] = useState(false);
   const emailRef = useRef();
@@ -59,4 +59,4 @@ const Page = () => {
   )
 }
 
-export default Page
+export default page
