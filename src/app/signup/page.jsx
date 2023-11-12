@@ -7,7 +7,7 @@ import signUp from '@/firebase/auth/signup'
 import { useRouter } from 'next/navigation'
 import ProtectedPublicRoute from '@/components/ProtectedPublicRoutes'
 
-const page = () => {
+const Page = () => {
   const [error, setError] = useState("");
   const emailRef = useRef();
   const passwordRef = useRef();
@@ -84,4 +84,4 @@ const page = () => {
   )
 }
 
-export default page
+export default Page
